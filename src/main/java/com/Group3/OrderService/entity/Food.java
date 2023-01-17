@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -41,7 +42,8 @@ public class Food extends BaseEntity implements Serializable{
 	private int foodId;	
 	
 	//@JsonDeserialize(converter = ToLowerCaseConverter.class)
-	@Column(unique = true)
+	@NotBlank(message = "Required")
+	@Column(unique = true)	
 	private String foodName;	
 	
 	private String foodPhoto;	

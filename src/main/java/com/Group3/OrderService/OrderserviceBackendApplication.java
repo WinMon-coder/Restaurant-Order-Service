@@ -71,7 +71,7 @@ public class OrderserviceBackendApplication implements CommandLineRunner {
 			userRepository.save(adminUser);
 
 		}
-		if (deleteFiles.equals("false")) {
+		if (deleteFiles.equals("true")) {
 			storageService.clearAll();
 		}
 
