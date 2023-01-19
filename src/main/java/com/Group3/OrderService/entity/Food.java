@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -47,6 +49,8 @@ public class Food extends BaseEntity implements Serializable{
 	private String foodName;	
 	
 	private String foodPhoto;	
+	
+	@Min(value = 1, message = "Value should be greater then then equal to 1")
 	private double foodPrice;
 	
     @ManyToOne

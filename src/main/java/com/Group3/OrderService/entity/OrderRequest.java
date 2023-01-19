@@ -24,6 +24,7 @@ import lombok.ToString;
 		private List<OrderItem>orderItems  = new ArrayList<>();
 		private OrderStatus orderStatus;
 		private double orderTotal;
+		private double orderDiscountTotal;
 			
 	
 }

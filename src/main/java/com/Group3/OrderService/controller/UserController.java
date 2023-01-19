@@ -91,9 +91,8 @@ public class UserController {
 		requestOrder.setOrderTable(orderRequest.getOrderTable());
 		requestOrder.setOrderStatus(OrderStatus.PROCESSING);
 		requestOrder.setOrderTotal(orderRequest.getOrderTotal());	
+		requestOrder.setOrderDiscountTotal(orderRequest.getOrderDiscountTotal());
 		Order newOrder = orderService.createOrder(requestOrder);
-		//System.out.println("Order List " + newOrder);
-		//System.out.println("Order Request " + orderRequest.getOrderItems());
 		for (int i = 0; i < orderRequest.getOrderItems().size(); i++) {
 			Food food = orderRequest.getOrderItems().get(i).getFood();
 				OrderItem orderItem = new OrderItem();
@@ -133,6 +132,7 @@ public class UserController {
 		
 		
 		Order updateOrder = orderService.updateOrder(id, order);
+		updateOrder.setOrderDiscountTotal(order.getOrderDiscountTotal());
 		for (int i = 0; i < updateOrder.getOrderItems().size(); i++) {		
 			Food food = order.getOrderItems().get(i).getFood();
 				OrderItem orderItem = new OrderItem();

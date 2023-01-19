@@ -1,6 +1,7 @@
 package com.Group3.OrderService.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,10 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.Group3.OrderService.dto.FoodDto;
 import com.Group3.OrderService.entity.Category;
+import com.Group3.OrderService.entity.Discount;
 import com.Group3.OrderService.entity.Food;
+import com.Group3.OrderService.entity.Order;
 import com.Group3.OrderService.entity.Table;
 import com.Group3.OrderService.entity.User;
 import com.Group3.OrderService.service.CategoryService;
+import com.Group3.OrderService.service.DiscountService;
 import com.Group3.OrderService.service.FoodService;
 import com.Group3.OrderService.service.StorageService;
 import com.Group3.OrderService.service.TableService;
@@ -42,6 +46,8 @@ public class AdminController {
 	@Autowired
 	FoodService foodService;
 	@Autowired
+	DiscountService discountService;
+	@Autowired
 	TableService tableService;
 
 	/*
@@ -49,21 +55,41 @@ public class AdminController {
 	 * -----------------------------------
 	 */
 	/***** CreateCategory ******************************/
-	@GetMapping("/category/categoryName/{categoryName}")
-	public ResponseEntity<Boolean>findCategoryByName(
-			@PathVariable("categoryName") String categoryName){
-		Category category = categoryService.getByCategoryName(categoryName);
-		if(category == null) {
-			return ResponseEntity.ok().body(false);
-		}
-		return ResponseEntity.ok().body(true);
+	
+	
+	@PostMapping("/discount/create")
+	public ResponseEntity<Discount> createDiscount(@Valid @RequestBody Discount discount) {
+		Discount newDiscount = discountService.createDiscount(discount);
+		return new ResponseEntity<Discount>(newDiscount, HttpStatus.OK);
+
 	}
 
+	/***** UpdateCategory ******************************/
+	@PutMapping(value = "/discount/update/{id}")
+	public ResponseEntity<Discount> updateDiscount(@PathVariable int id, @Valid @RequestBody Discount discount) {
+		Discount updateDiscount = discountService.updateDiscount(id, discount);
+		if (updateDiscount == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok().body(updateDiscount);
+	}
+	/***** UpdateCategory ******************************/
+	@PutMapping(value = "/discount/update_active/{id}")
+	public ResponseEntity<Discount> updateDiscountStatusOn(@PathVariable int id, @RequestBody Discount discount) {
+		Discount updateDiscountStatus = discountService.updateActiveDiscount(discount.getDiscountId(),discount);
+		return ResponseEntity.ok().body(updateDiscountStatus);
+	}
+	@PutMapping(value = "/discount/update_unactive")
+	public ResponseEntity<?> updateAllDiscountStatusOff() {
 
+		 discountService.makeAllDiscountUnActive();
+		return ResponseEntity.ok().build();
+	}
+	
 	@PostMapping("/category/create")
 	public ResponseEntity<Category> createCategory(@Valid @RequestBody Category category) {
 		Category newCategory = categoryService.createCategory(category);
-		return new ResponseEntity<Category>(newCategory, HttpStatus.ACCEPTED);
+		return new ResponseEntity<Category>(newCategory, HttpStatus.OK);
 
 	}
 
@@ -93,6 +119,24 @@ public class AdminController {
 		// Delete Photo
 		storageService.delete(category.getCategoryPhoto());
 
+		return ResponseEntity.ok().build();
+
+	}
+
+	/***** DeleteCategory ******************************/
+	@DeleteMapping(value = "/discount/delete/{id}")
+	public ResponseEntity<?> deleteDiscount(@PathVariable int id) {
+		Discount discount = discountService.getDiscount(id);
+		if (discount == null) {
+			return ResponseEntity.notFound().build();
+		}
+		boolean isDeleted = discountService.deleteDiscount(id);
+
+		if (!isDeleted) {
+			return ResponseEntity.notFound().build();
+
+		}
+		
 		return ResponseEntity.ok().build();
 
 	}

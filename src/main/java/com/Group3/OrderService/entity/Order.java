@@ -36,6 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @javax.persistence.Table(name = "orderName")
 
 public class Order extends BaseEntity implements Serializable{
@@ -63,12 +64,9 @@ public class Order extends BaseEntity implements Serializable{
 	private OrderStatus orderStatus;
 	
 	private double orderTotal;
+	private double orderDiscountTotal;
 
-	@Override
-	public String toString() {
-		return "Order [orderId=" + orderId + ", orderItems=" + orderItems + ", orderTable=" + orderTable
-				+ ", orderUser=" + orderUser + ", orderStatus=" + orderStatus + ", orderTotal=" + orderTotal + "]";
-	}
+	
 	
 //	@OneToMany
 //	@JoinColumn(name = "order_id",referencedColumnName = "orderId")

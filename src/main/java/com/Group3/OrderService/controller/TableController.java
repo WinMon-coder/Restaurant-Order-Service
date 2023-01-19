@@ -42,7 +42,7 @@ public class TableController {
 	OrderRepository orderRepository;
 	
 	/***** GetAllTableList ******************************/
-	@GetMapping("/{tableName}")
+	@GetMapping(value="/tableName/{tableName}")
 	public ResponseEntity<Boolean> findTableByName(@PathVariable("tableName") String tableName){
 		
 		Table table = tableService.getByTableName(tableName);

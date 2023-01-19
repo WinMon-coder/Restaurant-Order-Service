@@ -1,11 +1,9 @@
 package com.Group3.OrderService.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +21,15 @@ public class CategoryController {
 	StorageService storageService;
 	@Autowired
 	CategoryService categoryService;
+	@GetMapping(value="/categoryName/{categoryName}")
+	public ResponseEntity<Boolean>findCategoryByName(
+			@PathVariable("categoryName") String categoryName){
+		Category category = categoryService.getByCategoryName(categoryName);
+		if(category == null) {
+			return ResponseEntity.ok().body(false);
+		}
+		return ResponseEntity.ok().body(true);
+	}
 	
 	/***** GetAllCategoryList ******************************/
 	@GetMapping(value = "/list")
