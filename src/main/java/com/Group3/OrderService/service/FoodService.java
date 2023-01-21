@@ -19,7 +19,7 @@ public interface FoodService {
 
 	public Food getByFoodName(String foodName);
 
-	public List<Food> getAllFoodByCategory(Category category);
+	public List<FoodDto> getAllFoodByCategory(Category category);
 
 	public List<Food> getAllFoodByFoodName(String foodName);
 

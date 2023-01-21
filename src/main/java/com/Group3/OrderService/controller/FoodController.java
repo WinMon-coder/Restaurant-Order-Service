@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Group3.OrderService.dto.FoodDto;
 import com.Group3.OrderService.entity.Category;
 import com.Group3.OrderService.entity.Food;
+import com.Group3.OrderService.repository.FoodRepository;
 import com.Group3.OrderService.service.CategoryService;
 import com.Group3.OrderService.service.FoodService;
 
@@ -30,6 +31,8 @@ public class FoodController {
 	FoodService foodService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	FoodRepository foodRepository;
 
 	/***** getFoodsByCategory ******************************/
 	@GetMapping(value="/foodName/{foodName}")
@@ -47,7 +50,7 @@ public class FoodController {
 		if (category == null) {
 			return ResponseEntity.badRequest().body("Category ID is invalid");
 		}
-		List<Food> foodList = foodService.getAllFoodByCategory(category);
+		List<FoodDto> foodList = foodService.getAllFoodByCategory(category);
 		return ResponseEntity.ok().body(foodList);
 	}
 

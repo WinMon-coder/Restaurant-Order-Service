@@ -80,8 +80,12 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<Food> getAllFoodByCategory(Category category) {
-		return foodRepository.findByFoodCategory(category);
+	public List<FoodDto> getAllFoodByCategory(Category category) {
+		List<FoodDto> foodList = foodRepository.findByFoodCategory(category).stream()
+		.filter(food->food.getIsAvaliable() == true)
+		.map(food -> mapToDTO(food))
+		.collect(Collectors.toList());
+		return foodList;
 	}
 
 	

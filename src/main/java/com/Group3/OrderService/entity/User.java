@@ -56,13 +56,13 @@ public class User extends BaseEntity implements UserDetails{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 45, nullable = false)
 	private String userFullName;
 	
 	@Column(length = 100, nullable = false, unique = true)
 	private String userEmail;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 10, nullable = false)
 	private String userPassword;
 
 	@Column(columnDefinition = "ENUM('ACTIVE', 'REST') NOT NULL")

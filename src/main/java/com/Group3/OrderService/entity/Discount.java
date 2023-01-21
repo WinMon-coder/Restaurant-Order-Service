@@ -44,8 +44,8 @@ public class Discount extends BaseEntity implements Serializable {
 	
 	private int mininumOrderAmount;
 	
-	@Column(columnDefinition = "boolean")
-	@ColumnDefault("false")
+	
+	//@ColumnDefault("false")
 	private Boolean isActive;
 
 }
