@@ -1,9 +1,7 @@
 package com.Group3.OrderService.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -11,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,17 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Group3.OrderService.dto.FoodDto;
-import com.Group3.OrderService.entity.Category;
 import com.Group3.OrderService.entity.ChangePassword;
 import com.Group3.OrderService.entity.Food;
 import com.Group3.OrderService.entity.LoginRequest;
 import com.Group3.OrderService.entity.Order;
 import com.Group3.OrderService.entity.OrderItem;
 import com.Group3.OrderService.entity.OrderRequest;
-import com.Group3.OrderService.entity.Table;
 import com.Group3.OrderService.entity.User;
 import com.Group3.OrderService.enumType.OrderStatus;
-import com.Group3.OrderService.enumType.UserStatus;
 import com.Group3.OrderService.repository.FoodRepository;
 import com.Group3.OrderService.repository.OrderRepository;
 import com.Group3.OrderService.repository.UserRepository;
@@ -65,6 +59,10 @@ public class UserController {
 	ModelMapper modelMapper;
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+	/*
+	 * -----------------------------------START BY ORDER
+	 * -----------------------------------
+	 */
 	/***** UpdateOrderStatus ******************************/
 	@PutMapping(value = "/update/order_status")
 	public ResponseEntity<Order>updateOrder(@RequestBody Order order) {
@@ -73,7 +71,7 @@ public class UserController {
 		
 		return new ResponseEntity<Order>(updateOrderStatus,HttpStatus.OK);
 	}
-	/***** Order ******************************/
+	/***** GetOrderByStatus ******************************/
 	@GetMapping("/order")
 	public ResponseEntity<List<Order>> getOrderByStatus(@RequestParam int tableId ,@RequestParam String orderStatus) {
 		Order order = new Order();
@@ -108,7 +106,7 @@ public class UserController {
 		return new ResponseEntity<Order>(newOrder, HttpStatus.OK);
 	}
 	
-	/***** DeleteCategory ******************************/
+	/***** DeleteOrderItem ******************************/
 	@DeleteMapping(value = "/order_item/{id}")
 	public ResponseEntity<?> deleteOrderItem(@PathVariable int id) {
 		OrderItem orderItem = orderItemService.getOrderItem(id);
@@ -157,16 +155,16 @@ public class UserController {
 
 	}
 	
+	/*
+	 * -----------------------------------END BY ORDER
+	 * -----------------------------------
+	 */
 	
-	/***** GetCategory ******************************/
+	/*
+	 * -----------------------------------START BY REGISTER/LOGIN
+	 * -----------------------------------
+	 */
 	
-
-//	/***** AddFoodToOrder ******************************/
-//	@PostMapping(value = "/order/{orderId}/foods/{foodId}/add")
-//	public ResponseEntity<Order> addFoodToCart(@PathVariable final int orderId, @PathVariable final int foodId) {
-//		Order order = orderService.addFoodToOrder(orderId, foodId);
-//		return new ResponseEntity<Order>(order, HttpStatus.OK);
-//	}
 
 	/***** Register ******************************/
 	@PostMapping("/register")
@@ -228,6 +226,11 @@ public class UserController {
 		userService.updatePwd(user.getUserId(), changePwd.getNewPwd());
 		return ResponseEntity.ok().body(user);
 	}
+	
+	/*
+	 * -----------------------------------END BY REGISTER/LOGIN
+	 * -----------------------------------
+	 */
 
 	// convert dto to entity
 	private Food mapToEntity(FoodDto foodDto) {

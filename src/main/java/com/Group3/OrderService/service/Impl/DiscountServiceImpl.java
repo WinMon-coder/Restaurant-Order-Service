@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.Group3.OrderService.dto.FoodDto;
 import com.Group3.OrderService.entity.Discount;
 import com.Group3.OrderService.entity.Order;
-import com.Group3.OrderService.enumType.DiscountStatus;
 import com.Group3.OrderService.enumType.OrderStatus;
 import com.Group3.OrderService.repository.DiscountRepository;
 import com.Group3.OrderService.service.DiscountService;

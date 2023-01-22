@@ -15,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.Group3.OrderService.enumType.DiscountStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

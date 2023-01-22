@@ -1,7 +1,6 @@
 package com.Group3.OrderService.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -23,7 +22,6 @@ import com.Group3.OrderService.dto.FoodDto;
 import com.Group3.OrderService.entity.Category;
 import com.Group3.OrderService.entity.Discount;
 import com.Group3.OrderService.entity.Food;
-import com.Group3.OrderService.entity.Order;
 import com.Group3.OrderService.entity.Table;
 import com.Group3.OrderService.entity.User;
 import com.Group3.OrderService.service.CategoryService;
@@ -51,12 +49,11 @@ public class AdminController {
 	TableService tableService;
 
 	/*
-	 * ----------------------------------- START BY CATEGORY
+	 * ----------------------------------- START BY DISCOUNT
 	 * -----------------------------------
 	 */
-	/***** CreateCategory ******************************/
-	
-	
+	/***** CreateDiscount ******************************/
+		
 	@PostMapping("/discount/create")
 	public ResponseEntity<Discount> createDiscount(@Valid @RequestBody Discount discount) {
 		Discount newDiscount = discountService.createDiscount(discount);
@@ -64,7 +61,7 @@ public class AdminController {
 
 	}
 
-	/***** UpdateCategory ******************************/
+	/***** UpdateDiscount ******************************/
 	@PutMapping(value = "/discount/update/{id}")
 	public ResponseEntity<Discount> updateDiscount(@PathVariable int id, @Valid @RequestBody Discount discount) {
 		Discount updateDiscount = discountService.updateDiscount(id, discount);
@@ -73,7 +70,7 @@ public class AdminController {
 		}
 		return ResponseEntity.ok().body(updateDiscount);
 	}
-	/***** UpdateCategory ******************************/
+	/***** UpdateDiscount Active ******************************/
 	@PutMapping(value = "/discount/update_active/{id}")
 	public ResponseEntity<Discount> updateDiscountStatusOn(@PathVariable int id, @RequestBody Discount discount) {
 		Discount updateDiscountStatus = discountService.updateActiveDiscount(discount.getDiscountId(),discount);
@@ -85,7 +82,16 @@ public class AdminController {
 		 discountService.makeAllDiscountUnActive();
 		return ResponseEntity.ok().build();
 	}
-	
+	/*
+	 * ----------------------------------- END BY DISCOUNT
+	 * -----------------------------------
+	 */
+	/*
+	 * ----------------------------------- START BY CATEGORY
+	 * -----------------------------------
+	 */
+	/***** CreateCategory ******************************/
+		
 	@PostMapping("/category/create")
 	public ResponseEntity<Category> createCategory(@Valid @RequestBody Category category) {
 		Category newCategory = categoryService.createCategory(category);
