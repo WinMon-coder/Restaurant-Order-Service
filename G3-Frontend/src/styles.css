@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Raleway:wght@500&family=Sofia+Sans:wght@300&family=Ubuntu:wght@400&display=swap");
+body,
+html {
+  font-family: "Raleway", sans-serif;
+}
+h3,
+td,
+th,
+span {
+  font-family: "Sofia Sans", sans-serif;
+  font-weight: 900;
+}
+v-list-item-subtitle {
+  font-family: "Sofia Sans", sans-serif !important;
+}
+.v-toolbar__title {
+  font-family: "Sofia Sans", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+}
+.v-list-item__subtitle.mt-3.caption,
+h2 {
+  font-family: "Sofia Sans", sans-serif !important;
+  font-weight: 900;
+}
+strong,
+h4 {
+  font-family: "Sofia Sans", sans-serif;
+  font-size: large;
+  font-weight: 900;
+}
+/* ________TableNumber_______ */
+h1 {
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+}
+
+.theme--light.v-list-item--active .v-list-item__subtitle,
+.theme--light.v-list-item .v-list-item__action-text {
+  color: #ffffff !important;
+  font-family: "Raleway", sans-serif !important;
+  font-weight: 900;
+}
