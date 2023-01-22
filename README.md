@@ -1,7 +1,14 @@
 # Project Title - レストラン注文サービス (POS System)
-
 #### A full-stack POS System web application using Spring Boot and Vue.
 This is a Single Page Appliaction with client-side rendering.
+
+## Team Member
+- Win Mon Thi Lwin [winmon.info@gmail.com]
+- Thinzar Aung [thinzaraung@ucsy.edu.mm]
+- Kaung Lynn Shann [Kaunglynnshann@gmail.com]
+
+#### Project Time Management [https://docs.google.com/spreadsheets/d/1e8pMXs5DtLTE3ueBnGFqgBGBvKzNsjA-447SqCcKgPo/edit#gid=891834841]
+#### Project Presentation [https://docs.google.com/presentation/d/1wEzL3z7rEx9Mk0drsapughoKea8oCQfd/edit#slide=id.p1]
 
 ## Features
 - REST API
